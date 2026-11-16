@@ -7,16 +7,14 @@
 - Repo nhóm: `K5-L3A-DAY08-hihihaha-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
 - URL repo, nhánh nộp, commit chốt:
   - URL repo: https://github.com/VinUni-AI20k/K5-L3A-DAY08-hihihaha-FromWorkflowsToAgents
-  - Nhánh nộp: 
-  - Commit chốt: 
+  - Nhánh nộp: nguyenquangvu-2A202603407
+  - Commit chốt: e665c23
 
 ## Thành viên
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 | Nguyễn Quang Vũ | 2A202603407 |  |  | Shape A: Workflow & Deterministic Engine |
-|   2 | Nguyễn Quang Trung | 2A202603389 |  |  | Durability, Benchmark & Evaluation |
-|   3 | Nguyễn Tiến Đạt | 2A202603452 |  |  | Shape B & C: Single ReAct & Multi-Agent Orchestrator  |
+|   1 | Nguyễn Quang Vũ | 2A202603407 | vu.nq@vinuni.edu.vn | nguyenquangvu | Triển khai 4 Shapes, Benchmark & Báo cáo |
 
 Gợi ý chia vai:
 
@@ -30,9 +28,7 @@ Gợi ý chia vai:
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| Nguyễn Quang Vũ | Workflow & Deterministic Engine |  | tests/test_workflow_custom.py |
-| Nguyễn Tiến Đạt | Single ReAct & Multi-Agent Orchestrator |  | tests/test_agents_custom.py |
-| Nguyễn Quang Trung | Durability, Benchmark & Evaluation |  | tests/test_durability_custom.py |
+| Nguyễn Quang Vũ | Triển khai 4 Shapes, Benchmark & Báo cáo | e665c23 | tests/test_workflow_custom.py |
 
 ## Cá nhân
 
@@ -40,25 +36,27 @@ Mỗi thành viên đồng thời tạo một báo cáo riêng trong `report/` t
 
 ```text
 report/team/MSSV_HoTen.md
-```.
+```
 
+Ví dụ: `report/team/2A202603407_NguyenQuangVu.md`.
 
 ## 2A202603407_NguyenQuangVu
 
 ### Phần việc phụ trách
 
-- Cài đặt kiến trúc Shape A (Deterministic Workflow).
-- Xây dựng luồng xử lý tuần tự, tích hợp an toàn với host cổng `durability.issue_refund`.
-- Viết bộ unit test `tests/test_workflow_custom.py`.
+- Cài đặt và tích hợp toàn bộ các kiến trúc: Shape A (Workflow), Shape B (Single Agent), Shape C (Orchestrator).
+- Thực thi bộ kiểm thử crash safety 20/20 và benchmark 4 shapes × 5 seeds.
+- Viết bộ unit test `tests/test_workflow_custom.py` và hoàn thiện hồ sơ báo cáo.
 
 ### Đóng góp cụ thể
 
-- Commit chính:.
-- Xử lý các edge cases của workflow: claim không tồn tại, thiếu `order_id` (trả `needs_info`), đơn không thuộc sở hữu (trả `escalated`), quote 0 trả `denied`, quote > 0 gọi host an toàn.
-- Đảm bảo cơ chế crash injection (`crash_at`) đẩy ngoại lệ `InjectedCrash` lên host và flush trace thành công.
+- Hoàn thiện Shape A với logic tính quote cố định, tích hợp cổng duyệt host `durability.issue_refund`.
+- Hoàn thiện Shape B với vòng lặp ReAct `run_react` giới hạn 8 bước, chỉ dùng read tools.
+- Hoàn thiện Shape C với cơ chế handoff allowlist, điều tra viên chỉ đọc.
+- Chạy sinh `src/reports/crash.json` (20/20) và `src/reports/benchmark.json` (280 trials).
+- Viết hồ sơ quyết định kiến trúc (`decision_adr.md`) và phiếu nghiên cứu (`research_card.md`).
 
 ### Bằng chứng
 
-- Commit:.
 - File test: `tests/test_workflow_custom.py` (5 tests passed).
 - Báo cáo chi tiết: `report/team/2A202603407_NguyenQuangVu.md`.

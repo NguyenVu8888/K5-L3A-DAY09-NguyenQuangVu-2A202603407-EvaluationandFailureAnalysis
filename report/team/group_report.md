@@ -6,9 +6,7 @@ Tối đa 5 trang ngoài phụ lục. Số liệu lấy từ file trong `src/rep
 
 - Tên nhóm: hihihaha
 - Thành viên: xem `TEAM.md`
-  - Nguyễn Quang Vũ (MSSV: 2A202603407) 
-  - Nguyễn Tiến Đạt (MSSV: 2A202603452) - Nhóm trưởng
-  - Nguyễn Quang Trung (MSSV: 2A202603389)
+  - Nguyễn Quang Vũ (MSSV: 2A202603407)
 
 ## 2. Mục tiêu và cách tiếp cận
 
@@ -85,10 +83,8 @@ Phiếu nghiên cứu R2 và thí nghiệm ablation: xem `report/team/research_c
 
 ## 6. Tổng hợp đóng góp
 
-Chi tiết đóng góp và commit kỹ thuật được tổng hợp trong `TEAM.md` và các báo cáo cá nhân:
-- **Nguyễn Quang Vũ (2A202603407):** Phụ trách Phần việc 1 — Shape A Workflow và bộ unit test `tests/test_workflow_custom.py` (Commit ).
-- **Nguyễn Tiến Đạt (2A202603452):** Phụ trách Phần việc 2 — Shape B Single Agent, Shape C Orchestrator và bộ unit test `tests/test_agents_custom.py` (Commit ).
-- **Nguyễn Quang Trung (2A202603389):** Phụ trách Phần việc 3 — Độ bền vững, Crash Test, Benchmark, `tests/test_durability_custom.py`, ADR và Research Card (Commit ).
+Chi tiết đóng góp và các kịch bản kiểm thử được tổng hợp trong `TEAM.md` và báo cáo cá nhân:
+- **Nguyễn Quang Vũ (2A202603407):** Chịu trách nhiệm triển khai và đánh giá toàn bộ 4 Shapes (Workflow, Single Agent, Orchestrator, Swarm Reference), thực thi bộ kiểm thử va đập Crash Safety (20/20), thực hiện đo lường Benchmark 280 trials, viết bộ unit test `tests/test_workflow_custom.py` và hoàn thiện hồ sơ báo cáo.
 
 ## 7. Hạn chế và hướng cải thiện
 
