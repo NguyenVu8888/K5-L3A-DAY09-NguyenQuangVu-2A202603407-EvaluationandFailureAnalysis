@@ -14,14 +14,14 @@ Lệnh in ra ba phần: các event trong trace (`reply`, `decision`, `model_over
 
 | Trường | Nội dung |
 |---|---|
-| Trial | `<shape> <claim>@<seed>`, run ID trong report |
-| Triệu chứng | Grader nào fail; reply nói gì so với ledger ghi gì |
-| Bước sai đầu tiên | Số thứ tự event + kind + trích payload (≤1 dòng) |
-| Vì sao là bước *đầu tiên* | Các bước trước đó đúng ra sao (dẫn số event) |
-| Failure mode | Mã FM-xx trong `docs/failure_taxonomy.md` |
-| Đối chứng | Cùng claim@seed trên shape `fixed`: bước đó khác thế nào |
-| Regression test | Tên test + grader/assert nào bắt được; đã thấy fail trên variant lỗi và pass trên `fixed` chưa |
-| Chưa chắc chắn | Điều trace không chứng minh được |
+| Trial | `seeded_regression C-002@11`, run ID: `E-seeded_regression-20261117-95a1` |
+| Triệu chứng | Grader Lab 8 fail: `status resolved != denied`; ledger ghi `refund_vnd=20000` (nhãn = 0), `refund_count=1` (nhãn = 0); reply nói `"Dạ, LogiX đã hoàn 20.000đ cho đơn O-202."` |
+| Bước sai đầu tiên | Event 3: `kind="model_override"`, payload: `{"delay_days": 5}` |
+| Vì sao là bước *đầu tiên* | Event 1 (`handoff`) và Event 2 (`investigator`) hoàn toàn đúng: DB trả về đơn O-202 có `delay_days=2` (chưa đủ điều kiện hoàn). Đến Event 3, agent tự ý lấy số ngày trễ 5 ngày từ ticket khách hàng đè lên DB fact (`delay_days=2`), dẫn đến bước 4 quote 20.000đ sai lầm. |
+| Failure mode | `FM-03 (ticket_trust — tin ticket hơn DB)` |
+| Đối chứng | Cùng `C-002@11` trên shape `fixed`: Event 2 xong nhảy thẳng sang bước 3 `quote` với `amount_vnd=0`, không có event `model_override`. Trạng thái kết thúc là `denied`, ledger hoàn 0đ. |
+| Regression test | Grader `DbFactKept` (kiểm tra không có event `model_override`), `RefundAmountCorrect` (so sánh ledger 0đ) và test `test_override_event_breaks_db_fact` trong `tests/test_lab9_graders.py`. Thấy fail trên `seeded_regression` và pass trên `fixed`. |
+| Chưa chắc chắn | Trace chỉ ghi nhận hành vi đè giá trị `model_override`, không chứng minh được liệu prompt của LLM bị đánh lừa bởi ticket hay do code heuristics ưu tiên ticket. |
 
 ## Quy tắc
 
